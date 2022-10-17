@@ -1,0 +1,97 @@
+text = input("Enter a file:")
+
+file = open(text, "r")
+import collections
+def word_count(file):
+  total = 0
+  for line in file:
+    tokens = line.split()
+    for token in tokens:
+      total = int(total) + 1
+  return total
+
+print("there are", word_count(file), "words")
+
+file2 = open(text, "r")
+data = file2.read()
+
+def character_count(data):
+  return len(data)
+
+print("there are", character_count(data), "characters")
+
+
+file = open(text, "r")
+data = file.read().replace('\n', '')
+
+vowels = ['a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U',]
+def vowel_count(data):
+  freq = {'a': 0, 'e':0, 'i':0, 'o':0, 'u':0, 'A':0, 'E':0, 'I':0, 'O':0, 'U':0}
+  for c in data:
+    if c in vowels:
+      freq[c] = data.count(c)
+  freq['a'] = freq['a'] + freq['A']
+  freq['e'] = freq['e'] + freq['E']
+  freq['i'] = freq['i'] + freq['I']
+  freq['o'] = freq['o'] + freq['O']
+  freq['u'] = freq['u'] + freq['U']
+  del freq['A']
+  del freq['E']
+  del freq['I']
+  del freq['O']
+  del freq['U']
+  return freq
+
+print(vowel_count(data))
+file = open(text, "r")
+
+def longest_words(file):
+  longest_list = []
+  old_length = 0
+  for line in file:
+    tokens = line.split()
+    for token in tokens:
+      new_length = len(token)
+      if new_length > old_length:
+        old_length = new_length
+        longest_list.clear()
+        longest_list.append(token)
+      elif new_length == old_length:
+        longest_list.append(token)
+      
+  return longest_list
+print(longest_words(file))
+
+file = open(text, "r")
+def most_common_words(file):
+  duplicate = []
+  word = set(duplicate)
+  old_count = 0
+  for line in file:
+    tokens = line.split()
+    for token in tokens:
+      count = tokens.count(token)
+      if count > old_count:
+        old_count = count
+        duplicate.clear()
+        duplicate.append(token)
+      elif count == old_count:
+        duplicate.append(token)
+  return set(duplicate)
+print(longest_words(file))
+
+filename = open("hamlet.txt", "r")  
+def most_common_words(filename):
+
+  dict1 = {}
+  for x in filename:
+    split = x.split()
+    for y in split:
+      if x in dict1:
+        dict1[y] += 1
+      else:
+        dict1[y] = 1
+  largest_value = max(dict1, key=dict1.get)
+  return largest_value  
+print(most_common_words(file))
+file.close()
