@@ -1,0 +1,82 @@
+import math
+
+def prime_number(number):      
+  assert(type(number) == int)
+  if (number < 2):
+    return False
+  for i in range(2, int(math.sqrt(number)) + 1):
+    if number % i == 0:
+      return False
+  return True
+
+'''
+What does f1(x) do?
+finds if the number is prime
+What would be a better name for the function?
+is_prime_number
+'''
+
+def f2(x):
+  assert(type(x) == int)
+  list1 = []
+  i = 2
+  while (i <= x):
+    if f1(i) and x % i == 0:
+      list1.append(i)
+      x /= i
+      i = 2
+    else:
+      i += 1
+  return list1
+
+'''
+What does f2(x) do?
+it does the prime factorization for the numbers
+What would be a better name for the function?
+prime_factors
+What is the purpose of list1?
+to store the prime factors in a list
+'''
+
+def f3(x, y):
+  assert(type(x) == int)
+  assert(type(y) == int)
+  list1 = f2(x)
+  list2 = f2(y)
+  g = 1
+  for p in list1:
+    if p in list2:
+      g *= p
+      list2.remove(p)
+  return g
+
+'''
+What does f3(x, y) do?
+-checks what the greatest common factor is
+What would be a better name for the function?
+-greatest_common_factor
+What is the purpose of list1 and list2?
+-to store the prime factors of x and y and multiply them together to find the greatest common factor
+What would be a better name for g?
+factor
+'''
+
+def f4(x, y):
+  assert(type(x) == int)
+  assert(type(y) == int)
+  z = f3(x, y)
+  x /= z
+  y /= z
+  if (y != 1):
+    return str(int(x)) + "/" + str(int(y))
+  else:
+    return str(int(x))
+
+'''
+What does f4(x, y) do?
+-makes x and y into the smallest fraction possible of those two numbers
+What would be a better name for the function?
+-reduced_fraction
+What would be a better name for z?
+-greatest_common_factor
+'''
